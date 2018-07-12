@@ -5,8 +5,8 @@ import java.util.*;
 public class MyLinkedList<E> implements List<E> {
 
     private int size = 0;
-    Node<E> first;
-    Node<E> last;
+    private Node<E> first;
+    private Node<E> last;
 
     public MyLinkedList() {
     }

@@ -30,10 +30,11 @@ public class MyArrayList<E> implements List<E> {
         return null;
     }
 
-    public E[] toArray() {
-        return null;
+    public Object[] toArray() {
+        return Arrays.copyOf(data, size);
     }
 
+    // TODO
     public Object[] toArray(Object[] a) {
         return new Object[0];
     }
@@ -45,26 +46,42 @@ public class MyArrayList<E> implements List<E> {
         return true;
     }
 
+    //TODO
     public boolean remove(Object o) {
         return false;
     }
 
+    public E remove(int index) {
+        rangeCheck(index);
+        E toRemove = get(index);
+        for (int i = index; i < size; i++) {
+            data[index] = data[++index];
+        }
+        data[--size] = null;
+        return toRemove;
+    }
+
+    //TODO
     public boolean containsAll(Collection c) {
         return false;
     }
 
+    //TODO
     public boolean addAll(Collection c) {
         return false;
     }
 
+    //TODO
     public boolean addAll(int index, Collection c) {
         return false;
     }
 
+    //TODO
     public boolean removeAll(Collection c) {
         return false;
     }
 
+    //TODO
     public boolean retainAll(Collection c) {
         return false;
     }
@@ -93,10 +110,6 @@ public class MyArrayList<E> implements List<E> {
     public void add(int index, Object element) {
     }
 
-    public E remove(int index) {
-        return null;
-    }
-
     public int indexOf(Object o) {
         for (int i = 0; i < size; i++) {
             if (data[i].equals(o)) {
@@ -106,18 +119,22 @@ public class MyArrayList<E> implements List<E> {
         return -1;
     }
 
+    //TODO
     public int lastIndexOf(Object o) {
         return 0;
     }
 
+    //TODO
     public ListIterator listIterator() {
         return null;
     }
 
+    //TODO
     public ListIterator listIterator(int index) {
         return null;
     }
 
+    //TODO
     public List subList(int fromIndex, int toIndex) {
         return null;
     }
