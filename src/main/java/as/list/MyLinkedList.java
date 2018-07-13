@@ -1,4 +1,4 @@
-package my_list;
+package as.list;
 
 import java.util.*;
 
@@ -58,7 +58,6 @@ public class MyLinkedList<E> implements List<E> {
     public void add(int index, E element) {
     }
 
-    //TO check
     public E remove(int index) {
         checkIndex(index);
         if (index == 0) {

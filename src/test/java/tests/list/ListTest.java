@@ -1,28 +1,33 @@
-package test_list;
+package tests.list;
 
-import my_list.MyArrayList;
-import my_list.MyLinkedList;
+import as.list.MyArrayList;
+import as.list.MyLinkedList;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 
-public class MyArrayListTest {
+public class ListTest {
 
     private List<String> list = new MyArrayList<>();
     private List<String> list1 = new MyLinkedList<>();
 
-    @BeforeClass
+    @BeforeMethod
     public void before() {
         for (int i = 0; i < 3; i++)
             list.add("" + i);
     }
 
+    @AfterMethod
+    public void after() {
+        list.clear();
+    }
+
     @Test
     public void testInsert() {
-        System.out.println("Running testInsert()");
         Assert.assertEquals(list.size(), 3);
         list.add(1, "Insert");
         Assert.assertEquals(list.size(), 4);
@@ -40,13 +45,11 @@ public class MyArrayListTest {
 
     @Test
     public void testOrder() {
-        System.out.println("Running testOrder()");
         compare(list, new String[]{"0", "1", "2"});
     }
 
     @Test
     public void testRemove() {
-        System.out.println("Running testRemove()");
         Assert.assertEquals(list.size(), 3);
         list.remove(1);
         Assert.assertEquals(list.size(), 2);

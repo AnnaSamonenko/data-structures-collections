@@ -1,4 +1,4 @@
-package my_list;
+package as.list;
 
 import java.util.*;
 
