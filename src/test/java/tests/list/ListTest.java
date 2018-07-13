@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-
 public class ListTest {
 
     private List<String> list = new MyArrayList<>();
@@ -30,6 +29,11 @@ public class ListTest {
     public void testInsert() {
         Assert.assertEquals(list.size(), 3);
         list.add(1, "Insert");
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.print(list.get(i) + " ");
+        }
+
         Assert.assertEquals(list.size(), 4);
         Assert.assertEquals(list.get(1), "Insert");
     }

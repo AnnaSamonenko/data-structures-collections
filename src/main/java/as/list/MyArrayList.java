@@ -122,7 +122,17 @@ public class MyArrayList<E> implements List<E> {
 
     //TODO
     public void add(int index, Object element) {
+        ensureCapacity();
+        // + verify index
+        for (int i = 0; i < size + 1; i++) {
+            if (i == index) {
+                size++;
+                Object temp = data[index];
+                data[i + 1] = data[i];
+                data[index] = element;
 
+            }
+        }
     }
 
     public int indexOf(Object o) {
@@ -172,8 +182,7 @@ public class MyArrayList<E> implements List<E> {
     }
 
     private void ensureCapacity() {
-        size *= 2;
-        data = Arrays.copyOf(data, size);
+        data = Arrays.copyOf(data, size * 2);
     }
 
     private void fastRemove(int index) {
