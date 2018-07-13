@@ -27,7 +27,7 @@ public class MyArrayList<E> implements List<E> {
     }
 
     public Iterator iterator() {
-        return null;
+        return new Itr();
     }
 
     public Object[] toArray() {
@@ -46,8 +46,22 @@ public class MyArrayList<E> implements List<E> {
         return true;
     }
 
-    //TODO
     public boolean remove(Object o) {
+        if (o == null) {
+            for (int i = 0; i < size; i++) {
+                if (data[i] == null) {
+                    fastRemove(i);
+                    return true;
+                }
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (data[i].equals(o)) {
+                    fastRemove(i);
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -55,9 +69,8 @@ public class MyArrayList<E> implements List<E> {
         rangeCheck(index);
         E toRemove = get(index);
         for (int i = index; i < size; i++) {
-            data[index] = data[++index];
+            fastRemove(i);
         }
-        data[--size] = null;
         return toRemove;
     }
 
@@ -107,7 +120,9 @@ public class MyArrayList<E> implements List<E> {
         return oldValue;
     }
 
+    //TODO
     public void add(int index, Object element) {
+
     }
 
     public int indexOf(Object o) {
@@ -119,14 +134,26 @@ public class MyArrayList<E> implements List<E> {
         return -1;
     }
 
-    //TODO
     public int lastIndexOf(Object o) {
-        return 0;
+        if (o == null) {
+            for (int i = size - 1; i != 0; i--) {
+                if (data[i] == null) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = size - 1; i != 0; i--) {
+                if (data[i].equals(o)) {
+                    return i;
+                }
+            }
+        }
+
+        return -1;
     }
 
-    //TODO
     public ListIterator listIterator() {
-        return null;
+        return new ListItr();
     }
 
     //TODO
@@ -147,5 +174,64 @@ public class MyArrayList<E> implements List<E> {
     private void ensureCapacity() {
         size *= 2;
         data = Arrays.copyOf(data, size);
+    }
+
+    private void fastRemove(int index) {
+        data[index] = data[++index];
+        data[--size] = null;
+    }
+
+    private class Itr implements Iterator<E> {
+        int cursor = -1;
+
+        @Override
+        public boolean hasNext() {
+            return cursor != size - 1;
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public E next() {
+            return (E) data[++cursor];
+        }
+    }
+
+    private class ListItr extends Itr implements ListIterator<E> {
+
+        @Override
+        public boolean hasPrevious() {
+            return cursor != -1;
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public E previous() {
+            return (E) data[--cursor];
+        }
+
+        @Override
+        public int nextIndex() {
+            return cursor + 1;
+        }
+
+        @Override
+        public int previousIndex() {
+            return cursor - 1;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void set(E e) {
+
+        }
+
+        @Override
+        public void add(E e) {
+
+        }
     }
 }
