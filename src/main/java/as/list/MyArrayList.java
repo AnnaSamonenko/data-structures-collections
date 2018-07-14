@@ -40,8 +40,7 @@ public class MyArrayList<E> implements List<E> {
     }
 
     public boolean add(Object o) {
-        if (size == data.length)
-            ensureCapacity();
+        ensureCapacity();
         data[size++] = o;
         return true;
     }
@@ -76,7 +75,7 @@ public class MyArrayList<E> implements List<E> {
 
     //TODO
     public boolean containsAll(Collection c) {
-        return false;
+        return true;
     }
 
     //TODO
@@ -120,19 +119,12 @@ public class MyArrayList<E> implements List<E> {
         return oldValue;
     }
 
-    //TODO
     public void add(int index, Object element) {
         ensureCapacity();
-        // + verify index
-        for (int i = 0; i < size + 1; i++) {
-            if (i == index) {
-                size++;
-                Object temp = data[index];
-                data[i + 1] = data[i];
-                data[index] = element;
-
-            }
-        }
+        rangeCheck(index);
+        size++;
+        System.arraycopy(data, index - 1, data, index, size);
+        data[index] = element;
     }
 
     public int indexOf(Object o) {
@@ -182,7 +174,8 @@ public class MyArrayList<E> implements List<E> {
     }
 
     private void ensureCapacity() {
-        data = Arrays.copyOf(data, size * 2);
+        if (size == data.length)
+            data = Arrays.copyOf(data, size * 2);
     }
 
     private void fastRemove(int index) {
