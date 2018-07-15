@@ -57,7 +57,16 @@ public class MyLinkedList<E> implements List<E> {
 
     //TODO
     public void add(int index, E element) {
-
+        Node<E> x = first;
+        for (int i = 0; i <= index; i++) {
+            if (i == index) {
+                Node<E> nodeToAdd = new Node<>(x.prev, element, x.next);
+                x.next = nodeToAdd;
+                nodeToAdd.next.prev = nodeToAdd;
+                size++;
+            }
+            x = x.next;
+        }
     }
 
     public E remove(int index) {

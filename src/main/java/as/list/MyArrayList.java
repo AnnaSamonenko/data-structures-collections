@@ -67,9 +67,7 @@ public class MyArrayList<E> implements List<E> {
     public E remove(int index) {
         rangeCheck(index);
         E toRemove = get(index);
-        for (int i = index; i < size; i++) {
-            fastRemove(i);
-        }
+        fastRemove(index);
         return toRemove;
     }
 
@@ -123,8 +121,8 @@ public class MyArrayList<E> implements List<E> {
         ensureCapacity();
         rangeCheck(index);
         size++;
-        System.arraycopy(data, index - 1, data, index, size);
-        data[index] = element;
+        System.arraycopy(data, index, data, index + 1, size);
+        data[index + 1] = element;
     }
 
     public int indexOf(Object o) {
@@ -179,8 +177,8 @@ public class MyArrayList<E> implements List<E> {
     }
 
     private void fastRemove(int index) {
-        data[index] = data[++index];
-        data[--size] = null;
+        System.arraycopy(data, index, data, index + 1, size);
+        size--;
     }
 
     private class Itr implements Iterator<E> {

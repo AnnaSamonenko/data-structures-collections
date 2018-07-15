@@ -11,8 +11,8 @@ import java.util.List;
 
 public class ListTest {
 
-    private List<String> list1 = new MyArrayList<>();
-    private List<String> list = new MyLinkedList<>();
+    private List<String> list = new MyArrayList<>();
+    private List<String> list1 = new MyLinkedList<>();
 
     @BeforeMethod
     public void before() {
@@ -25,8 +25,9 @@ public class ListTest {
     public void testInsertByIndex() {
         Assert.assertEquals(list.size(), 3);
         list.add(1, "Insert");
+        print();
         Assert.assertEquals(list.size(), 4);
-        Assert.assertEquals(list.get(1), "Insert");
+        Assert.assertEquals(list.get(2), "Insert");
     }
 
     @Test
@@ -61,6 +62,7 @@ public class ListTest {
     @Test
     public void testRemoveByValue() {
         list.remove("0");
+        print();
         compare(list, new String[]{"1", "2"});
     }
 
@@ -78,7 +80,9 @@ public class ListTest {
     @Test
     public void testRemoveByIndex() {
         Assert.assertEquals(list.size(), 3);
+        list.add("4");
         list.remove(2);
+        print();
         Assert.assertEquals(list.size(), 2);
         compare(list, new String[]{"0", "1"});
     }
