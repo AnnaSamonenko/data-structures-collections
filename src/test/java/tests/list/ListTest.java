@@ -41,6 +41,7 @@ public class ListTest {
     public void testSet() {
         Assert.assertEquals(list.size(), 3);
         list.set(1, "Set");
+        print();
         Assert.assertEquals(list.size(), 3);
         Assert.assertEquals(list.get(1), "Set");
     }

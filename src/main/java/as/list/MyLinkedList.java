@@ -51,11 +51,13 @@ public class MyLinkedList<E> implements List<E> {
             last.next = newNode;
             last = newNode;
         }
+        size++;
         return true;
     }
 
     //TODO
     public void add(int index, E element) {
+
     }
 
     public E remove(int index) {
@@ -155,8 +157,8 @@ public class MyLinkedList<E> implements List<E> {
 
     public E get(int index) {
         checkIndex(index);
+        Node<E> it = first;
         for (int i = 0; i <= index; i++) {
-            Node<E> it = first;
             if (i == index) {
                 return it.item;
             }
@@ -167,8 +169,8 @@ public class MyLinkedList<E> implements List<E> {
 
     public E set(int index, E element) {
         checkIndex(index);
+        Node<E> it = first;
         for (int i = 0; i <= index; i++) {
-            Node<E> it = first;
             if (index == i) {
                 E oldElement = it.item;
                 it.item = element;
