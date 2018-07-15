@@ -72,8 +72,9 @@ public class MyLinkedList<E> implements List<E> {
                 if (counter == index) {
                     //check
                     Node<E> toRemove = x;
-                    x.prev = toRemove.next;
-                    x.next = toRemove.prev;
+                    x.prev.next = toRemove.next;
+                    x.next.prev = toRemove.prev;
+                    size--;
                     return toRemove.item;
                 }
                 counter++;
@@ -108,6 +109,7 @@ public class MyLinkedList<E> implements List<E> {
         Node temp = first;
         first = first.next;
         first.prev = null;
+        size--;
         return (E) temp.item;
     }
 
@@ -115,6 +117,7 @@ public class MyLinkedList<E> implements List<E> {
         Node temp = last;
         last = last.prev;
         last.next = null;
+        size--;
         return (E) temp.item;
     }
 
