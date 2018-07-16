@@ -11,8 +11,8 @@ import java.util.List;
 
 public class ListTest {
 
-    private List<String> list = new MyArrayList<>();
-    private List<String> list1 = new MyLinkedList<>();
+    private List<String> list1 = new MyArrayList<>();
+    private List<String> list = new MyLinkedList<>();
 
     @BeforeMethod
     public void before() {
@@ -59,9 +59,8 @@ public class ListTest {
 
     @Test
     public void testRemoveByValue() {
-        list.remove("0");
-        print();
-        compare(list, new String[]{"1", "2"});
+        list.remove("2");
+        compare(list, new String[]{"0", "1"});
     }
 
     @Test
@@ -79,11 +78,54 @@ public class ListTest {
     public void testRemoveByIndex() {
         Assert.assertEquals(list.size(), 3);
         list.add("4");
-        print();
         list.remove(2);
-        print();
         Assert.assertEquals(list.size(), 3);
         compare(list, new String[]{"0", "1", "4"});
+    }
+
+    @Test
+    public void testContainsAll() {
+        List arrayList = new MyArrayList();
+        arrayList.add("0");
+        arrayList.add("2");
+        arrayList.add("1");
+
+        Assert.assertTrue(list.containsAll(arrayList));
+        list.remove("1");
+        Assert.assertFalse(list.containsAll(arrayList));
+    }
+
+    @Test
+    public void testAddAllToTheEnd() {
+        List arrayList = new MyArrayList();
+        arrayList.add("5");
+        arrayList.add("6");
+        arrayList.add("7");
+
+        list.addAll(arrayList);
+        compare(list, new String[]{"0", "1", "2", "5", "6", "7"});
+    }
+
+    @Test
+    public void testAddAllByIndex() {
+        List arrayList = new MyArrayList();
+        arrayList.add("5");
+        arrayList.add("6");
+        arrayList.add("7");
+
+        list.addAll(1, arrayList);
+        compare(list, new String[]{"0", "1", "5", "6", "7", "2"});
+    }
+
+    @Test
+    public void testRemoveAll() {
+        List arrayList = new MyArrayList();
+        arrayList.add("5");
+        arrayList.add("1");
+        arrayList.add("0");
+
+        list.removeAll(arrayList);
+        compare(list, new String[]{"2"});
     }
 
     @AfterMethod

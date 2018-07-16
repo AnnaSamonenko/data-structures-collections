@@ -71,23 +71,43 @@ public class MyArrayList<E> implements List<E> {
         return toRemove;
     }
 
-    //TODO
     public boolean containsAll(Collection c) {
+        Iterator itr = c.iterator();
+        while (itr.hasNext()) {
+            if (!contains(itr.next())) {
+                return false;
+            }
+        }
         return true;
     }
 
-    //TODO
+    //TODO: Check on the exceptions
     public boolean addAll(Collection c) {
+        // when return true
+        Iterator itr = c.iterator();
+        while (itr.hasNext()) {
+            add(itr.next());
+        }
         return false;
     }
 
-    //TODO
+    //TODO: Check on the exception
     public boolean addAll(int index, Collection c) {
+        Iterator itr = c.iterator();
+        int counter = index;
+        while (itr.hasNext()) {
+            add(counter, itr.next());
+            counter++;
+        }
         return false;
     }
 
-    //TODO
+    //TODO: Check on the exception
     public boolean removeAll(Collection c) {
+        Iterator itr = c.iterator();
+        while (itr.hasNext()) {
+            remove(itr.next());
+        }
         return false;
     }
 
@@ -148,21 +168,20 @@ public class MyArrayList<E> implements List<E> {
                 }
             }
         }
-
         return -1;
     }
 
-    public ListIterator listIterator() {
+    public ListIterator<E> listIterator() {
         return new ListItr();
     }
 
     //TODO
-    public ListIterator listIterator(int index) {
+    public ListIterator<E> listIterator(int index) {
         return null;
     }
 
     //TODO
-    public List subList(int fromIndex, int toIndex) {
+    public List<E> subList(int fromIndex, int toIndex) {
         return null;
     }
 

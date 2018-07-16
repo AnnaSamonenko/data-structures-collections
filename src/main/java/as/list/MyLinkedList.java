@@ -115,7 +115,7 @@ public class MyLinkedList<E> implements List<E> {
     }
 
     @SuppressWarnings("unchecked")
-    public E removeFirst() {
+    private E removeFirst() {
         Node temp = first;
         first = first.next;
         first.prev = null;
@@ -124,7 +124,7 @@ public class MyLinkedList<E> implements List<E> {
     }
 
     @SuppressWarnings("unchecked")
-    public E removeLast() {
+    private E removeLast() {
         Node temp = last;
         last = last.prev;
         last.next = null;
@@ -132,23 +132,43 @@ public class MyLinkedList<E> implements List<E> {
         return (E) temp.item;
     }
 
-    //TODO
+    //TODO: Check on the exception
     public boolean containsAll(Collection<?> c) {
-        return false;
+        Iterator itr = c.iterator();
+        while (itr.hasNext()) {
+            if (!contains(itr.next())) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    //TODO
+    //TODO: Check on the exception
     public boolean addAll(Collection<? extends E> c) {
+        Iterator itr = c.iterator();
+        while (itr.hasNext()) {
+            add((E) itr.next());
+        }
         return false;
     }
 
-    //TODO
+    //TODO: Check on the exception
     public boolean addAll(int index, Collection<? extends E> c) {
+        Iterator itr = c.iterator();
+        int counter = index;
+        while (itr.hasNext()) {
+            add(counter, (E) itr.next());
+            counter++;
+        }
         return false;
     }
 
-    //TODO
+    //TODO: Check on the exception
     public boolean removeAll(Collection<?> c) {
+        Iterator itr = c.iterator();
+        while (itr.hasNext()) {
+            remove(itr.next());
+        }
         return false;
     }
 
