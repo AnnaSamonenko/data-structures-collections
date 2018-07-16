@@ -1,19 +1,19 @@
 package as.map;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class MyHashMap<K, V> implements Map<K, V> {
 
+    private static int size = 0;
+
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override

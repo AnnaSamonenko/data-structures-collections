@@ -1,7 +1,6 @@
 package as.list;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 public class MyLinkedList<E> implements List<E> {
 
@@ -266,7 +265,7 @@ public class MyLinkedList<E> implements List<E> {
 
     //TODO: listIterator
     public ListIterator<E> listIterator(int index) {
-        return null;
+        return new ListItr(index);
     }
 
     //TODO: sublist
@@ -291,75 +290,72 @@ public class MyLinkedList<E> implements List<E> {
         }
     }
 
-    //TODO: Itr class
     private class Itr implements Iterator {
+
+        Node<E> current = first;
+        int index = 0;
 
         @Override
         public boolean hasNext() {
-            return false;
+            return current.next != null;
         }
 
         @Override
         public Object next() {
-            return null;
+            index++;
+            return current.next;
         }
 
         @Override
         public void remove() {
-
-        }
-
-        @Override
-        public void forEachRemaining(Consumer action) {
-
+            MyLinkedList.this.remove(index);
+            index--;
         }
     }
 
     //TODO: ListItr class
-    private class ListItr implements ListIterator {
-        @Override
-        public boolean hasNext() {
-            return false;
+    private class ListItr extends Itr implements ListIterator {
+
+        public ListItr() {
+            super();
         }
 
-        @Override
-        public Object next() {
-            return null;
+        public ListItr(int index) {
+            this.index = index;
+            for (int counter = 0; counter != index; counter++) {
+                current = current.next;
+            }
         }
 
         @Override
         public boolean hasPrevious() {
-            return false;
+            return current.prev != null;
         }
 
         @Override
         public Object previous() {
-            return null;
+            index--;
+            return current.prev;
         }
 
         @Override
         public int nextIndex() {
-            return 0;
+            return index + 1;
         }
 
         @Override
         public int previousIndex() {
-            return 0;
-        }
-
-        @Override
-        public void remove() {
-
+            return index - 1;
         }
 
         @Override
         public void set(Object o) {
-
+            MyLinkedList.this.set(index, (E) o);
         }
 
         @Override
         public void add(Object o) {
-
+            MyLinkedList.this.add(index, (E) o);
         }
     }
 }

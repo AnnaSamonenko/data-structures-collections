@@ -36,7 +36,7 @@ public class MyArrayList<E> implements List<E> {
 
     // TODO: toArray method
     public Object[] toArray(Object[] a) {
-        return new Object[0];
+        return null;
     }
 
     public boolean add(Object o) {
@@ -181,7 +181,6 @@ public class MyArrayList<E> implements List<E> {
         return new ListItr();
     }
 
-    //TODO: listIterator
     public ListIterator<E> listIterator(int index) {
         return new ListItr(index);
     }
