@@ -42,6 +42,7 @@ public class MyLinkedList<E> implements List<E> {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     public boolean add(E e) {
         if (first == null) {
             first = new Node(null, e, null);
@@ -55,7 +56,6 @@ public class MyLinkedList<E> implements List<E> {
         return true;
     }
 
-    //TODO
     public void add(int index, E element) {
         Node<E> x = first;
         for (int i = 0; i <= index; i++) {
@@ -114,6 +114,7 @@ public class MyLinkedList<E> implements List<E> {
         return false;
     }
 
+    @SuppressWarnings("unchecked")
     public E removeFirst() {
         Node temp = first;
         first = first.next;
@@ -122,6 +123,7 @@ public class MyLinkedList<E> implements List<E> {
         return (E) temp.item;
     }
 
+    @SuppressWarnings("unchecked")
     public E removeLast() {
         Node temp = last;
         last = last.prev;
@@ -248,7 +250,7 @@ public class MyLinkedList<E> implements List<E> {
         return null;
     }
 
-    void checkIndex(int index) {
+    private void checkIndex(int index) {
         if (index > size)
             throw new IndexOutOfBoundsException();
     }

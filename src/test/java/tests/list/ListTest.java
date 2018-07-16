@@ -25,7 +25,6 @@ public class ListTest {
     public void testInsertByIndex() {
         Assert.assertEquals(list.size(), 3);
         list.add(1, "Insert");
-        print();
         Assert.assertEquals(list.size(), 4);
         Assert.assertEquals(list.get(2), "Insert");
     }
@@ -42,7 +41,6 @@ public class ListTest {
     public void testSet() {
         Assert.assertEquals(list.size(), 3);
         list.set(1, "Set");
-        print();
         Assert.assertEquals(list.size(), 3);
         Assert.assertEquals(list.get(1), "Set");
     }
@@ -81,10 +79,16 @@ public class ListTest {
     public void testRemoveByIndex() {
         Assert.assertEquals(list.size(), 3);
         list.add("4");
+        print();
         list.remove(2);
         print();
-        Assert.assertEquals(list.size(), 2);
-        compare(list, new String[]{"0", "1"});
+        Assert.assertEquals(list.size(), 3);
+        compare(list, new String[]{"0", "1", "4"});
+    }
+
+    @AfterMethod
+    public void after() {
+        list.clear();
     }
 
     private void compare(List lst, String[] strs) {
@@ -99,11 +103,5 @@ public class ListTest {
             System.out.print(list.get(i) + " ");
         }
     }
-
-    @AfterMethod
-    public void after() {
-        list.clear();
-    }
-
 }
 

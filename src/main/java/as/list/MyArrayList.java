@@ -177,7 +177,7 @@ public class MyArrayList<E> implements List<E> {
     }
 
     private void fastRemove(int index) {
-        System.arraycopy(data, index, data, index + 1, size);
+        System.arraycopy(data, index + 1, data, index, size);
         size--;
     }
 
