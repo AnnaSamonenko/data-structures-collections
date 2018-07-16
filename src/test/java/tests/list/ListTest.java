@@ -7,13 +7,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ListTest {
 
-    private List<String> list1 = new MyArrayList<>();
-    private List<String> list = new MyLinkedList<>();
+    private List<String> list = new MyArrayList<>();
+    private List<String> list1 = new MyLinkedList<>();
 
     @BeforeMethod
     public void before() {
@@ -137,6 +138,15 @@ public class ListTest {
         list.retainAll(arrayList);
 
         compare(list, new String[]{"0", "2"});
+    }
+
+    @Test
+    public void testIterator() {
+        list.add("10");
+        list.add("16");
+        Iterator itr = list.listIterator();
+        // TODO: implement test for Iterator
+        print(list);
     }
 
     @AfterMethod

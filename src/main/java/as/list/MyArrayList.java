@@ -1,7 +1,6 @@
 package as.list;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 public class MyArrayList<E> implements List<E> {
 
@@ -226,11 +225,6 @@ public class MyArrayList<E> implements List<E> {
             MyArrayList.this.remove(cursor);
             cursor--;
         }
-
-        @Override
-        public void forEachRemaining(Consumer<? super E> action) {
-
-        }
     }
 
     private class ListItr extends Itr implements ListIterator<E> {
@@ -256,20 +250,14 @@ public class MyArrayList<E> implements List<E> {
             return cursor - 1;
         }
 
-        //TODO: listIterator: remove, set, add
-        @Override
-        public void remove() {
-
-        }
-
         @Override
         public void set(E e) {
-
+            MyArrayList.this.set(cursor, e);
         }
 
         @Override
         public void add(E e) {
-
+            MyArrayList.this.add(cursor, e);
         }
     }
 }
