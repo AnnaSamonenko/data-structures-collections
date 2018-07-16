@@ -1,6 +1,7 @@
 package as.list;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class MyLinkedList<E> implements List<E> {
 
@@ -23,9 +24,8 @@ public class MyLinkedList<E> implements List<E> {
         return indexOf(o) != -1;
     }
 
-    //TODO
     public Iterator<E> iterator() {
-        return null;
+        return new Itr();
     }
 
     public Object[] toArray() {
@@ -37,7 +37,7 @@ public class MyLinkedList<E> implements List<E> {
         return result;
     }
 
-    //TODO
+    //TODO: toArray
     public <T> T[] toArray(T[] a) {
         return null;
     }
@@ -172,8 +172,13 @@ public class MyLinkedList<E> implements List<E> {
         return false;
     }
 
-    //TODO
     public boolean retainAll(Collection<?> c) {
+        Iterator itr = iterator();
+        while (itr.hasNext()) {
+            if (!c.contains(itr.next())) {
+                itr.remove();
+            }
+        }
         return false;
     }
 
@@ -255,17 +260,16 @@ public class MyLinkedList<E> implements List<E> {
         return -1;
     }
 
-    //TODO
     public ListIterator<E> listIterator() {
-        return null;
+        return new ListItr();
     }
 
-    //TODO
+    //TODO: listIterator
     public ListIterator<E> listIterator(int index) {
         return null;
     }
 
-    //TODO
+    //TODO: sublist
     public List<E> subList(int fromIndex, int toIndex) {
         return null;
     }
@@ -284,6 +288,78 @@ public class MyLinkedList<E> implements List<E> {
             this.item = element;
             this.next = next;
             this.prev = prev;
+        }
+    }
+
+    //TODO: Itr class
+    private class Itr implements Iterator {
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Object next() {
+            return null;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void forEachRemaining(Consumer action) {
+
+        }
+    }
+
+    //TODO: ListItr class
+    private class ListItr implements ListIterator {
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Object next() {
+            return null;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return false;
+        }
+
+        @Override
+        public Object previous() {
+            return null;
+        }
+
+        @Override
+        public int nextIndex() {
+            return 0;
+        }
+
+        @Override
+        public int previousIndex() {
+            return 0;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void set(Object o) {
+
+        }
+
+        @Override
+        public void add(Object o) {
+
         }
     }
 }

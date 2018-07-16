@@ -7,6 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class ListTest {
@@ -128,6 +129,16 @@ public class ListTest {
         compare(list, new String[]{"2"});
     }
 
+    @Test
+    public void testRetainAll() {
+        List arrayList = new LinkedList();
+        arrayList.add("2");
+        arrayList.add("0");
+        list.retainAll(arrayList);
+
+        compare(list, new String[]{"0", "2"});
+    }
+
     @AfterMethod
     public void after() {
         list.clear();
@@ -140,9 +151,9 @@ public class ListTest {
             Assert.assertEquals(strs[i], (String) array[i]);
     }
 
-    private void print() {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.print(list.get(i) + " ");
+    private void print(List x) {
+        for (int i = 0; i < x.size(); i++) {
+            System.out.print(x.get(i) + " ");
         }
     }
 }

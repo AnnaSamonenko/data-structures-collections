@@ -1,6 +1,7 @@
 package as.list;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class MyArrayList<E> implements List<E> {
 
@@ -34,7 +35,7 @@ public class MyArrayList<E> implements List<E> {
         return Arrays.copyOf(data, size);
     }
 
-    // TODO
+    // TODO: toArray method
     public Object[] toArray(Object[] a) {
         return new Object[0];
     }
@@ -111,8 +112,14 @@ public class MyArrayList<E> implements List<E> {
         return false;
     }
 
-    //TODO
-    public boolean retainAll(Collection c) {
+    //TODO: Check on the exception
+    public boolean retainAll(Collection<?> c) {
+        Iterator itr = iterator();
+        while (itr.hasNext()) {
+            if (!c.contains(itr.next())) {
+                itr.remove();
+            }
+        }
         return false;
     }
 
@@ -175,12 +182,12 @@ public class MyArrayList<E> implements List<E> {
         return new ListItr();
     }
 
-    //TODO
+    //TODO: listIterator
     public ListIterator<E> listIterator(int index) {
         return null;
     }
 
-    //TODO
+    //TODO: sublist
     public List<E> subList(int fromIndex, int toIndex) {
         return null;
     }
@@ -213,6 +220,17 @@ public class MyArrayList<E> implements List<E> {
         public E next() {
             return (E) data[++cursor];
         }
+
+        @Override
+        public void remove() {
+            MyArrayList.this.remove(cursor);
+            cursor--;
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super E> action) {
+
+        }
     }
 
     private class ListItr extends Itr implements ListIterator<E> {
@@ -238,6 +256,7 @@ public class MyArrayList<E> implements List<E> {
             return cursor - 1;
         }
 
+        //TODO: listIterator: remove, set, add
         @Override
         public void remove() {
 
