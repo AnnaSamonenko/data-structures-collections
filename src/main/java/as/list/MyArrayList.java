@@ -183,7 +183,7 @@ public class MyArrayList<E> implements List<E> {
 
     //TODO: listIterator
     public ListIterator<E> listIterator(int index) {
-        return null;
+        return new ListItr(index);
     }
 
     //TODO: sublist
@@ -229,9 +229,17 @@ public class MyArrayList<E> implements List<E> {
 
     private class ListItr extends Itr implements ListIterator<E> {
 
+        ListItr() {
+        }
+
+        ListItr(int index) {
+            super();
+            this.cursor = index;
+        }
+
         @Override
         public boolean hasPrevious() {
-            return cursor != -1;
+            return cursor != 0;
         }
 
         @Override

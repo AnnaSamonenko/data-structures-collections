@@ -10,11 +10,12 @@ import org.testng.annotations.Test;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class ListTest {
 
-    private List<String> list = new MyArrayList<>();
-    private List<String> list1 = new MyLinkedList<>();
+    private List<String> list1 = new MyArrayList<>();
+    private List<String> list = new MyLinkedList<>();
 
     @BeforeMethod
     public void before() {
@@ -140,13 +141,51 @@ public class ListTest {
         compare(list, new String[]{"0", "2"});
     }
 
+    //TODO: implement test for Iterator
+    @Test
+    public void testIteratorHasPrevious() {
+        ListIterator itr = list.listIterator(0);
+        Assert.assertFalse(itr.hasPrevious());
+        itr.next();
+        Assert.assertTrue(itr.hasPrevious());
+    }
+
+    @Test
+    public void testIteratorIndex() {
+        ListIterator itr = list.listIterator(2);
+        Assert.assertEquals(itr.nextIndex(), 3);
+        Assert.assertEquals(itr.previousIndex(), 1);
+    }
+
     @Test
     public void testIterator() {
+        ListIterator itr = list.listIterator(2);
+        Assert.assertNull(itr.next());
+        //TODO: verify that this is eligible
+        Assert.assertEquals(itr.previous(), "2");
+    }
+
+    @Test
+    public void testIteratorRemove() {
         list.add("10");
         list.add("16");
-        Iterator itr = list.listIterator();
-        // TODO: implement test for Iterator
-        print(list);
+        Iterator itr = list.listIterator(2);
+        itr.remove();
+        compare(list, new String[]{"0", "1", "10", "16"});
+    }
+
+    @Test
+    public void testIteratorSet() {
+        ListIterator itr = list.listIterator(1);
+        itr.set("10");
+        compare(list, new String[]{"0", "10", "2"});
+    }
+
+    @Test
+    public void testIteratorAdd() {
+        ListIterator itr = list.listIterator(1);
+        itr.add("10");
+        compare(list, new String[]{"0", "1", "10", "2"});
     }
 
     @AfterMethod
