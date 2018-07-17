@@ -11,7 +11,7 @@ import java.util.*;
 
 public class ListTest {
 
-    private List<String> list1 = new MyArrayList<>();
+    //private List<String> list = new MyArrayList<>();
     private List<String> list = new MyLinkedList<>();
 
     @BeforeMethod
@@ -23,7 +23,11 @@ public class ListTest {
 
     @Test
     public void testToArray() {
+        Object[] arrayList = list.toArray();
+        Assert.assertTrue(Arrays.deepEquals(arrayList, new Object[]{"0", "1", "2"}));
     }
+
+    //TODO: add test method to the add with param
 
     @Test
     public void testInsertByIndex() {
@@ -138,7 +142,6 @@ public class ListTest {
         arrayList.add("2");
         arrayList.add("0");
         list.retainAll(arrayList);
-        print(list);
         compare(list, new String[]{"0", "2"});
     }
 
@@ -193,7 +196,7 @@ public class ListTest {
 
     private void compare(List lst, String[] strs) {
         Object[] array = lst.toArray();
-        Assert.assertTrue(array.length == strs.length, "Arrays not the same length");
+        Assert.assertEquals(array.length, strs.length, "Arrays not the same length");
         for (int i = 0; i < array.length; i++)
             Assert.assertEquals(strs[i], (String) array[i]);
     }

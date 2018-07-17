@@ -36,9 +36,13 @@ public class MyLinkedList<E> implements List<E> {
         return result;
     }
 
-    //TODO: toArray
-    public <T> T[] toArray(T[] a) {
-        return null;
+    public <E> E[] toArray(E[] a) {
+        for (int i = 0; i < a.length; i++) {
+            a[i] = (E) this.get(i);
+        }
+        if (a.length > size)
+            a[size] = null;
+        return a;
     }
 
     @SuppressWarnings("unchecked")

@@ -34,9 +34,13 @@ public class MyArrayList<E> implements List<E> {
         return Arrays.copyOf(data, size);
     }
 
-    // TODO: toArray method
     public Object[] toArray(Object[] a) {
-        return null;
+        if (a.length < size)
+            return Arrays.copyOf(data, size, a.getClass());
+        System.arraycopy(data, 0, a, 0, a.length);
+        if (a.length > size)
+            a[size] = null;
+        return a;
     }
 
     public boolean add(Object o) {
