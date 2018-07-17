@@ -138,6 +138,7 @@ public class ListTest {
         arrayList.add("2");
         arrayList.add("0");
         list.retainAll(arrayList);
+        print(list);
         compare(list, new String[]{"0", "2"});
     }
 
@@ -159,9 +160,7 @@ public class ListTest {
     @Test
     public void testIterator() {
         ListIterator itr = list.listIterator(2);
-        Assert.assertNull(itr.next());
-        //TODO: verify that this is eligible
-        Assert.assertEquals(itr.previous(), "2");
+        Assert.assertEquals(itr.previous(), "1");
     }
 
     @Test

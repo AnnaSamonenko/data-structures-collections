@@ -303,7 +303,8 @@ public class MyLinkedList<E> implements List<E> {
         @Override
         public Object next() {
             index++;
-            return current.next;
+            current = current.next;
+            return current.item;
         }
 
         @Override
@@ -335,7 +336,7 @@ public class MyLinkedList<E> implements List<E> {
         @Override
         public Object previous() {
             index--;
-            return current.prev;
+            return current.prev.item;
         }
 
         @Override
