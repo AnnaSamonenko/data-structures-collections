@@ -85,17 +85,15 @@ public class MyArrayList<E> implements List<E> {
         return true;
     }
 
-    //TODO: Check on the exceptions
     public boolean addAll(Collection c) {
         // when return true
         Iterator itr = c.iterator();
         while (itr.hasNext()) {
             add(itr.next());
         }
-        return false;
+        return true;
     }
 
-    //TODO: Check on the exception
     public boolean addAll(int index, Collection c) {
         Iterator itr = c.iterator();
         int counter = index;
@@ -103,19 +101,17 @@ public class MyArrayList<E> implements List<E> {
             add(counter, itr.next());
             counter++;
         }
-        return false;
+        return true;
     }
 
-    //TODO: Check on the exception
     public boolean removeAll(Collection c) {
         Iterator itr = c.iterator();
         while (itr.hasNext()) {
             remove(itr.next());
         }
-        return false;
+        return true;
     }
 
-    //TODO: Check on the exception
     public boolean retainAll(Collection<?> c) {
         Iterator itr = iterator();
         while (itr.hasNext()) {
@@ -123,7 +119,7 @@ public class MyArrayList<E> implements List<E> {
                 itr.remove();
             }
         }
-        return false;
+        return true;
     }
 
     public void clear() {

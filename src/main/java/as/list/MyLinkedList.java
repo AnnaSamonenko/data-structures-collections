@@ -135,7 +135,6 @@ public class MyLinkedList<E> implements List<E> {
         return (E) temp.item;
     }
 
-    //TODO: Check on the exception
     public boolean containsAll(Collection<?> c) {
         Iterator itr = c.iterator();
         while (itr.hasNext()) {
@@ -146,16 +145,14 @@ public class MyLinkedList<E> implements List<E> {
         return true;
     }
 
-    //TODO: Check on the exception
     public boolean addAll(Collection<? extends E> c) {
         Iterator itr = c.iterator();
         while (itr.hasNext()) {
             add((E) itr.next());
         }
-        return false;
+        return true;
     }
 
-    //TODO: Check on the exception
     public boolean addAll(int index, Collection<? extends E> c) {
         Iterator itr = c.iterator();
         int counter = index;
@@ -163,16 +160,15 @@ public class MyLinkedList<E> implements List<E> {
             add(counter, (E) itr.next());
             counter++;
         }
-        return false;
+        return true;
     }
 
-    //TODO: Check on the exception
     public boolean removeAll(Collection<?> c) {
         Iterator itr = c.iterator();
         while (itr.hasNext()) {
             remove(itr.next());
         }
-        return false;
+        return true;
     }
 
     public boolean retainAll(Collection<?> c) {
@@ -182,7 +178,7 @@ public class MyLinkedList<E> implements List<E> {
                 itr.remove();
             }
         }
-        return false;
+        return true;
     }
 
     public void clear() {
@@ -267,7 +263,6 @@ public class MyLinkedList<E> implements List<E> {
         return new ListItr();
     }
 
-    //TODO: listIterator
     public ListIterator<E> listIterator(int index) {
         return new ListItr(index);
     }
@@ -318,7 +313,6 @@ public class MyLinkedList<E> implements List<E> {
         }
     }
 
-    //TODO: ListItr class
     private class ListItr extends Itr implements ListIterator {
 
         public ListItr() {

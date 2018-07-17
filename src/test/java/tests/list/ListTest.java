@@ -1,7 +1,6 @@
 package tests.list;
 
 import as.list.MyArrayList;
-import as.list.MyLinkedList;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -11,8 +10,8 @@ import java.util.*;
 
 public class ListTest {
 
-    //private List<String> list = new MyArrayList<>();
-    private List<String> list = new MyLinkedList<>();
+    private List<String> list = new MyArrayList<>();
+    //private List<String> list = new MyLinkedList<>();
 
     @BeforeMethod
     public void before() {
