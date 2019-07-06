@@ -5,6 +5,12 @@ import java.util.*;
 public class MyHashMap<K, V> implements Map {
 
     private static int size = 0;
+    private Entry[] bucket;
+    private int defaultSize = 16;
+
+    public MyHashMap() {
+        bucket = new Entry[defaultSize];
+    }
 
     @Override
     public int size() {
@@ -28,12 +34,38 @@ public class MyHashMap<K, V> implements Map {
 
     @Override
     public V get(Object key) {
+        int index = key.hashCode() % bucket.length;
+
+        MyEntry head = (MyEntry) bucket[index];
+        if (head.getKey().equals(key)) {
+            return (V) head.getValue();
+        } else {
+            while (head.getNext() != null) {
+                head = head.next;
+                if (head.getKey().equals(key)) {
+                    return (V) head.getValue();
+                }
+            }
+        }
         return null;
     }
 
     @Override
     public Object put(Object key, Object value) {
-        return null;
+        MyEntry newEntry = new MyEntry(key, value);
+        int index = (int) newEntry.getHash() % bucket.length;
+
+        if (bucket[index] == null) {
+            bucket[index] = newEntry;
+        } else {
+            MyEntry entry = (MyEntry) bucket[index];
+            while (entry.getNext() != null) {
+                entry = entry.getNext();
+            }
+            entry.setNext(newEntry);
+        }
+        size++;
+        return newEntry;
     }
 
     @Override
@@ -42,10 +74,12 @@ public class MyHashMap<K, V> implements Map {
     }
 
     @Override
-    public void putAll(Map m) {}
+    public void putAll(Map m) {
+    }
 
     @Override
-    public void clear() {}
+    public void clear() {
+    }
 
     @Override
     public Set keySet() {
@@ -62,26 +96,45 @@ public class MyHashMap<K, V> implements Map {
         return null;
     }
 
-    class MyEntry<K, V> implements Map.Entry {
+    private class MyEntry<K, V> implements Map.Entry {
 
         private long hash;
         private K key;
         private V value;
         private MyEntry next;
 
+        public MyEntry(K key, V value) {
+            this.key = key;
+            this.value = value;
+            hash = key.hashCode();
+        }
+
         @Override
         public Object getKey() {
-            return null;
+            return key;
         }
 
         @Override
         public Object getValue() {
-            return null;
+            return value;
         }
 
         @Override
         public Object setValue(Object value) {
-            return null;
+            this.value = (V) value;
+            return value;
+        }
+
+        public long getHash() {
+            return hash;
+        }
+
+        public MyEntry getNext() {
+            return next;
+        }
+
+        public void setNext(MyEntry next) {
+            this.next = next;
         }
     }
 
