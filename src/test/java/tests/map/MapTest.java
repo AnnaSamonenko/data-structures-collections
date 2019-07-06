@@ -1,9 +1,9 @@
 package tests.map;
 
 import as.map.MyHashMap;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class MapTest {
@@ -15,15 +15,15 @@ public class MapTest {
         map.put(1, "olha");
         map.put(2, "anna");
 
-        System.out.println(map.get(1));
-        System.out.println(map.get(2));
+        Assert.assertEquals("olha", map.get(1));
+        Assert.assertEquals("anna", map.get(2));
     }
 
     @Test
     public void testCollision() {
         map.put(17, "collision");
 
-        System.out.println(map.get(17));
+        Assert.assertEquals("collision", map.get(17));
     }
 
     @Test
@@ -31,20 +31,20 @@ public class MapTest {
         map.put(18, "old");
         map.put(18, "new");
 
-        System.out.println(map.get(18));
+        Assert.assertEquals("new", map.get(18));
     }
 
     @Test
     public void testContainsKey() {
         map.put(4, "new");
 
-        System.out.println(map.containsKey(4));
-        System.out.println(map.containsKey(20));
+        Assert.assertTrue(map.containsKey(4));
+        Assert.assertFalse(map.containsKey(20));
     }
 
     @Test
     public void testGetByUnexistedKey() {
-        System.out.println(map.get(20));
+        Assert.assertNull(map.get(20));
     }
 
 }
