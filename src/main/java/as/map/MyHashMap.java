@@ -51,6 +51,8 @@ public class MyHashMap<K, V> implements Map {
         int index = key.hashCode() % bucket.length;
 
         MyEntry head = (MyEntry) bucket[index];
+        if (head == null)
+            return null;
         if (head.getKey().equals(key)) {
             return (V) head.getValue();
         } else {
