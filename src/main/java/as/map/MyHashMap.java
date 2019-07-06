@@ -2,7 +2,7 @@ package as.map;
 
 import java.util.*;
 
-public class MyHashMap<K, V> implements Map<K, V> {
+public class MyHashMap<K, V> implements Map {
 
     private static int size = 0;
 
@@ -42,13 +42,10 @@ public class MyHashMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public void putAll(Map m) {
-
-    }
+    public void putAll(Map m) {}
 
     @Override
-    public void clear() {
-    }
+    public void clear() {}
 
     @Override
     public Set keySet() {
@@ -61,7 +58,31 @@ public class MyHashMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public Set<Entry<K, V>> entrySet() {
+    public Set<Map.Entry<K, V>> entrySet() {
         return null;
     }
+
+    class MyEntry<K, V> implements Map.Entry {
+
+        private long hash;
+        private K key;
+        private V value;
+        private MyEntry next;
+
+        @Override
+        public Object getKey() {
+            return null;
+        }
+
+        @Override
+        public Object getValue() {
+            return null;
+        }
+
+        @Override
+        public Object setValue(Object value) {
+            return null;
+        }
+    }
+
 }
