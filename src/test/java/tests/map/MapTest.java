@@ -13,11 +13,30 @@ public class MapTest {
     public void testPut() {
         map.put(1, "olha");
         map.put(2, "anna");
-        map.put(3, "polina");
 
         System.out.println(map.get(1));
         System.out.println(map.get(2));
-        System.out.println(map.get(3));
+    }
+
+    @Test
+    public void testCollision() {
+        map.put(17, "collision");
+
+        System.out.println(map.get(17));
+    }
+
+    @Test
+    public void testPutByRepeatedKey() {
+        map.put(18, "old");
+        map.put(18, "new");
+
+        System.out.println(map.get(18));
+    }
+
+
+    @Test
+    public void testGetByUnexistedKey() {
+        System.out.println(map.get(20));
     }
 
 }
