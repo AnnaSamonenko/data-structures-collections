@@ -3,6 +3,7 @@ package tests.map;
 import as.map.MyHashMap;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class MapTest {
@@ -33,6 +34,13 @@ public class MapTest {
         System.out.println(map.get(18));
     }
 
+    @Test
+    public void testContainsKey() {
+        map.put(4, "new");
+
+        System.out.println(map.containsKey(4));
+        System.out.println(map.containsKey(20));
+    }
 
     @Test
     public void testGetByUnexistedKey() {

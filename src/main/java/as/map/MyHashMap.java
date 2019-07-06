@@ -24,6 +24,20 @@ public class MyHashMap<K, V> implements Map {
 
     @Override
     public boolean containsKey(Object key) {
+        int index = key.hashCode() % bucket.length;
+        if (bucket[index] != null) {
+            MyEntry entry = (MyEntry) bucket[index];
+            if (entry.getKey().equals(key)) {
+                return true;
+            } else {
+                while (entry.getNext() != null) {
+                    entry = entry.getNext();
+                    if (entry.getKey().equals(key)) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
@@ -83,6 +97,7 @@ public class MyHashMap<K, V> implements Map {
 
     @Override
     public Set keySet() {
+
         return null;
     }
 
