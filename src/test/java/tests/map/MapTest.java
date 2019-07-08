@@ -47,4 +47,13 @@ public class MapTest {
         Assert.assertNull(map.get(20));
     }
 
+    @Test
+    public void testClear() {
+        map.put(3, "new");
+        map.clear();
+
+        Assert.assertNull(map.get(3));
+        Assert.assertEquals(0, map.size());
+    }
+
 }

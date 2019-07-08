@@ -95,11 +95,14 @@ public class MyHashMap<K, V> implements Map {
 
     @Override
     public void clear() {
+        for (int i = 0; i < bucket.length; i++) {
+            bucket[i] = null;
+        }
+        size = 0;
     }
 
     @Override
     public Set keySet() {
-
         return null;
     }
 
