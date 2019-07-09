@@ -5,11 +5,11 @@ import java.util.*;
 public class MyHashMap<K, V> implements Map {
 
     private static int size = 0;
-    private Entry[] bucket;
+    private Node[] bucket;
     private int defaultSize = 16;
 
     public MyHashMap() {
-        bucket = new Entry[defaultSize];
+        bucket = new Node[defaultSize];
     }
 
     @Override
@@ -26,13 +26,13 @@ public class MyHashMap<K, V> implements Map {
     public boolean containsKey(Object key) {
         int index = key.hashCode() % bucket.length;
         if (bucket[index] != null) {
-            MyEntry entry = (MyEntry) bucket[index];
-            if (entry.getKey().equals(key)) {
+            Node node = bucket[index];
+            if (node.getKey().equals(key)) {
                 return true;
             } else {
-                while (entry.getNext() != null) {
-                    entry = entry.getNext();
-                    if (entry.getKey().equals(key)) {
+                while (node.getNext() != null) {
+                    node = node.getNext();
+                    if (node.getKey().equals(key)) {
                         return true;
                     }
                 }
@@ -50,7 +50,7 @@ public class MyHashMap<K, V> implements Map {
     public V get(Object key) {
         int index = key.hashCode() % bucket.length;
 
-        MyEntry head = (MyEntry) bucket[index];
+        Node head =  bucket[index];
         if (head == null)
             return null;
         if (head.getKey().equals(key)) {
@@ -68,20 +68,20 @@ public class MyHashMap<K, V> implements Map {
 
     @Override
     public Object put(Object key, Object value) {
-        MyEntry newEntry = new MyEntry(key, value);
-        int index = (int) newEntry.getHash() % bucket.length;
+        Node newNode = new Node(key, value);
+        int index = (int) newNode.getHash() % bucket.length;
 
         if (bucket[index] == null) {
-            bucket[index] = newEntry;
+            bucket[index] = newNode;
         } else {
-            MyEntry entry = (MyEntry) bucket[index];
+            Node entry = (Node) bucket[index];
             while (entry.getNext() != null) {
                 entry = entry.getNext();
             }
-            entry.setNext(newEntry);
+            entry.setNext(newNode);
         }
         size++;
-        return newEntry;
+        return newNode;
     }
 
     @Override
@@ -116,14 +116,14 @@ public class MyHashMap<K, V> implements Map {
         return null;
     }
 
-    private class MyEntry<K, V> implements Map.Entry {
+    class Node<K, V> implements Map.Entry {
 
         private long hash;
         private K key;
         private V value;
-        private MyEntry next;
+        private Node next;
 
-        public MyEntry(K key, V value) {
+        public Node(K key, V value) {
             this.key = key;
             this.value = value;
             hash = key.hashCode();
@@ -149,11 +149,11 @@ public class MyHashMap<K, V> implements Map {
             return hash;
         }
 
-        public MyEntry getNext() {
+        public Node getNext() {
             return next;
         }
 
-        public void setNext(MyEntry next) {
+        public void setNext(Node next) {
             this.next = next;
         }
     }
