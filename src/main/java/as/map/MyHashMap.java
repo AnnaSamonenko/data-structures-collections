@@ -7,8 +7,6 @@ public class MyHashMap<K, V> implements Map {
     private static int size = 0;
     private Node[] bucket;
     private int defaultSize = 16;
-    private Set keySet;
-    private Set values;
 
     public MyHashMap() {
         bucket = new Node[defaultSize];
@@ -45,6 +43,17 @@ public class MyHashMap<K, V> implements Map {
 
     @Override
     public boolean containsValue(Object value) {
+        for (Node node : bucket) {
+            if (node != null) {
+                if (Objects.equals(node.getValue(), value))
+                    return true;
+                while (node.getNext() != null) {
+                    if (Objects.equals(node.getValue(), value))
+                        return true;
+                    node = node.getNext();
+                }
+            }
+        }
         return false;
     }
 
@@ -128,7 +137,7 @@ public class MyHashMap<K, V> implements Map {
         return null;
     }
 
-    class Node<K, V> implements Map.Entry {
+    static class Node<K, V> implements Map.Entry {
 
         private long hash;
         private K key;

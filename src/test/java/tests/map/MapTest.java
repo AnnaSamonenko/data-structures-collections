@@ -4,14 +4,13 @@ import as.map.MyHashMap;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class MapTest {
 
-    Map<Integer, String> map = new MyHashMap();
+    private Map<Integer, String> map = new MyHashMap<>();
 
     @Test
     public void testPut() {
@@ -66,8 +65,6 @@ public class MapTest {
         map.put(17, "kee");
         map.put(1, "kee");
 
-        int[] arr = {1, 2, 17, 1};
-
         Set expected = new HashSet<>();
         expected.add(1);
         expected.add(2);
@@ -75,6 +72,20 @@ public class MapTest {
 
 
         Assert.assertEquals(expected, map.keySet());
+    }
+
+    @Test
+    public void testContainsValue(){
+        map.put(1, "lala");
+        map.put(2, "434");
+        map.put(17, "kee");
+        map.put(1, "kee");
+
+
+        Assert.assertTrue(map.containsValue("lala"));
+        Assert.assertTrue(map.containsValue("434"));
+        Assert.assertTrue(map.containsValue("kee"));
+        Assert.assertFalse(map.containsValue("notPresent"));
     }
 
 }
