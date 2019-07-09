@@ -7,6 +7,8 @@ public class MyHashMap<K, V> implements Map {
     private static int size = 0;
     private Node[] bucket;
     private int defaultSize = 16;
+    private Set keySet;
+    private Set values;
 
     public MyHashMap() {
         bucket = new Node[defaultSize];
@@ -50,7 +52,7 @@ public class MyHashMap<K, V> implements Map {
     public V get(Object key) {
         int index = key.hashCode() % bucket.length;
 
-        Node head =  bucket[index];
+        Node head = bucket[index];
         if (head == null)
             return null;
         if (head.getKey().equals(key)) {
@@ -103,7 +105,17 @@ public class MyHashMap<K, V> implements Map {
 
     @Override
     public Set keySet() {
-        return null;
+        Set<K> res = new HashSet();
+        for (Node node : bucket) {
+            if (node != null) {
+                res.add((K) node.getKey());
+                while (node.getNext() != null) {
+                    node = node.getNext();
+                    res.add((K) node.getKey());
+                }
+            }
+        }
+        return res;
     }
 
     @Override
