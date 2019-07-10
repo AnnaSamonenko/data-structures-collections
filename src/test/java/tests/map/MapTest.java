@@ -59,7 +59,7 @@ public class MapTest {
     }
 
     @Test
-    public void testKeySet(){
+    public void testKeySet() {
         map.put(1, "lala");
         map.put(2, "434");
         map.put(17, "kee");
@@ -75,7 +75,7 @@ public class MapTest {
     }
 
     @Test
-    public void testContainsValue(){
+    public void testContainsValue() {
         map.put(1, "lala");
         map.put(2, "434");
         map.put(17, "kee");
@@ -86,6 +86,19 @@ public class MapTest {
         Assert.assertTrue(map.containsValue("434"));
         Assert.assertTrue(map.containsValue("kee"));
         Assert.assertFalse(map.containsValue("notPresent"));
+    }
+
+    @Test
+    public void testRemoveByKey() {
+        map.put(1, "olha");
+        map.put(2, "anna");
+
+        HashSet<Integer> expected = new HashSet<>();
+        expected.add(2);
+
+        Assert.assertEquals("olha", map.remove(1));
+        Assert.assertNull(map.get(1));
+        Assert.assertEquals(expected, map.keySet());
     }
 
 }

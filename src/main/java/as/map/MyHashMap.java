@@ -6,10 +6,10 @@ public class MyHashMap<K, V> implements Map {
 
     private static int size = 0;
     private Node[] bucket;
-    private int defaultSize = 16;
+    private final int DEFAULT_SIZE = 16;
 
     public MyHashMap() {
-        bucket = new Node[defaultSize];
+        bucket = new Node[DEFAULT_SIZE];
     }
 
     @Override
@@ -85,7 +85,7 @@ public class MyHashMap<K, V> implements Map {
         if (bucket[index] == null) {
             bucket[index] = newNode;
         } else {
-            Node entry = (Node) bucket[index];
+            Node entry = bucket[index];
             while (entry.getNext() != null) {
                 entry = entry.getNext();
             }
@@ -97,7 +97,21 @@ public class MyHashMap<K, V> implements Map {
 
     @Override
     public V remove(Object key) {
-        return null;
+        int index = key.hashCode() % bucket.length;
+        Node node = bucket[index];
+        if (node.getKey().equals(key)) {
+            bucket[index] = null;
+        } else {
+            while (node.getNext() != null) {
+                if (node.getNext().getKey().equals(key)) {
+                    Node toRemove = node.getNext();
+                    node.setNext(node.getNext().getNext());
+                    return (V) toRemove.getValue();
+                }
+                node = node.getNext();
+            }
+        }
+        return (V) node.getValue();
     }
 
     @Override
