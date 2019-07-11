@@ -148,7 +148,17 @@ public class MyHashMap<K, V> implements Map {
 
     @Override
     public Set<Map.Entry<K, V>> entrySet() {
-        return null;
+        Set<Map.Entry<K, V>> res = new HashSet<>();
+        for (Node<K, V> node : bucket) {
+            if (node != null) {
+                res.add(node);
+                while (node.getNext() != null) {
+                    node = node.getNext();
+                    res.add(node);
+                }
+            }
+        }
+        return res;
     }
 
     static class Node<K, V> implements Map.Entry {

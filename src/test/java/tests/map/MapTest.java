@@ -92,13 +92,23 @@ public class MapTest {
     public void testRemoveByKey() {
         map.put(1, "olha");
         map.put(2, "anna");
+        map.put(17, "565");
 
         HashSet<Integer> expected = new HashSet<>();
         expected.add(2);
+        expected.add(1);
 
-        Assert.assertEquals("olha", map.remove(1));
-        Assert.assertNull(map.get(1));
+        Assert.assertEquals("565", map.remove(17));
+        Assert.assertNull(map.get(17));
         Assert.assertEquals(expected, map.keySet());
+    }
+
+    @Test
+    public void testEntrySet() {
+        map.put(1, "olha");
+        map.put(2, "anna");
+
+        System.out.print(map.entrySet());
     }
 
 }
