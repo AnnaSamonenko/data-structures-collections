@@ -2,6 +2,7 @@ package tests.map;
 
 import as.map.MyHashMap;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import java.util.HashSet;
@@ -11,6 +12,11 @@ import java.util.Set;
 public class MapTest {
 
     private Map<Integer, String> map = new MyHashMap<>();
+
+    @AfterMethod
+    public void after() {
+        map.clear();
+    }
 
     @Test
     public void testPut() {
@@ -81,8 +87,6 @@ public class MapTest {
         map.put(17, "kee");
         map.put(1, "kee");
 
-
-        Assert.assertTrue(map.containsValue("lala"));
         Assert.assertTrue(map.containsValue("434"));
         Assert.assertTrue(map.containsValue("kee"));
         Assert.assertFalse(map.containsValue("notPresent"));
