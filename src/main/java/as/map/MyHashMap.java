@@ -6,7 +6,8 @@ public class MyHashMap<K, V> implements Map {
 
     private static int size = 0;
     private Node[] bucket;
-    private final int DEFAULT_SIZE = 16;
+    private static final int DEFAULT_SIZE = 16;
+    private static final double DEFAULT_LOAD_FACTOR = 0.75;
 
     public MyHashMap() {
         bucket = new Node[DEFAULT_SIZE];
@@ -81,6 +82,22 @@ public class MyHashMap<K, V> implements Map {
     public Object put(Object key, Object value) {
         Node newNode = new Node(key, value);
         int index = (int) newNode.getHash() % bucket.length;
+
+        if (containsKey(key)) {
+            if (bucket[index].getKey().equals(key)) {
+                bucket[index].setValue(value);
+                return bucket[index];
+            } else {
+                Node entry = bucket[index];
+                while (entry.getNext() != null) {
+                    if (entry.getKey().equals(key)) {
+                        entry.setValue(value);
+                        return value;
+                    }
+                    entry = entry.getNext();
+                }
+            }
+        }
 
         if (bucket[index] == null) {
             bucket[index] = newNode;

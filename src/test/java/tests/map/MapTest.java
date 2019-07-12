@@ -17,15 +17,15 @@ public class MapTest {
         map.put(1, "olha");
         map.put(2, "anna");
 
-        Assert.assertEquals("olha", map.get(1));
-        Assert.assertEquals("anna", map.get(2));
+        Assert.assertEquals(map.get(1), "olha");
+        Assert.assertEquals(map.get(2), "anna");
     }
 
     @Test
     public void testCollision() {
         map.put(17, "collision");
 
-        Assert.assertEquals("collision", map.get(17));
+        Assert.assertEquals(map.get(17), "collision");
     }
 
     @Test
@@ -33,7 +33,7 @@ public class MapTest {
         map.put(18, "old");
         map.put(18, "new");
 
-        Assert.assertEquals("new", map.get(18));
+        Assert.assertEquals(map.get(18), "new");
     }
 
     @Test
@@ -98,9 +98,9 @@ public class MapTest {
         expected.add(2);
         expected.add(1);
 
-        Assert.assertEquals("565", map.remove(17));
+        Assert.assertEquals(map.remove(17), "565");
         Assert.assertNull(map.get(17));
-        Assert.assertEquals(expected, map.keySet());
+        Assert.assertEquals(map.keySet(), expected);
     }
 
     @Test
